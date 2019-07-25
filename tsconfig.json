@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    //Hang
+    "jsx": "react",
     "sourceMap": true,
     "declaration": false,
     "module": "es2015",
@@ -17,4 +19,5 @@
       "@environments/*": ["src/environments/*"]
     }
   }
+  
 }

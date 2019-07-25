@@ -1,9 +1,23 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 7!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+﻿
+<p>You're on Home page!!</p>
+
+ 
+
+<!-- <h3>Measure == {{measures}}</h3> -->
+<!-- <app-kpi
+    projectId="ht3owbpk6h0yfjtkcsgva3osu3z7paol"
+    measure="aa5JBkFDa7sJ">
+</app-kpi> -->
+<h3>Pie chart</h3>
+<app-pie-chart
+    projectId="ht3owbpk6h0yfjtkcsgva3osu3z7paol"
+    viewBy="attr.restaurantlocation.locationstate">
+</app-pie-chart> 
+<!-- <h3>Pivot Table</h3> 
+<app-pivot-table
+    projectId="ht3owbpk6h0yfjtkcsgva3osu3z7paol"
+    measures="aa5JBkFDa7sJ"
+    rows="attr.restaurantlocation.locationstate"
+    columns="attr.restaurantlocation.locationcity"
+    pageSize=20>
+</app-pivot-table> -->  

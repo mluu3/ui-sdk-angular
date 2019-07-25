@@ -1,17 +1,19 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private cookieService: CookieService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -20,18 +22,41 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
+    login(username: string, password: string) : Observable<any>{
+        var body = {
+            "postUserLogin":{
+                "login":"hang.ngo@gooddata.com",
+                "password":"changeit",
+                "remember":1,
+                "verify_level":0
+            }
+        }
 
-                return user;
-            }));
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        });
+        let options = { 
+            headers: headers,
+            observe: 'response' as 'body',
+            withCredentials: true
+        };
+
+        var ret = this.http.post<any>(`${environment.apiUrl}/gdc/account/login`, body, options);        
+        ret.subscribe(resp => {
+            console.log(resp);
+            console.log(resp.headers)
+            var setCookieHeader = resp.headers.get('Set-Cookie');
+            console.log(setCookieHeader)
+            //this.cookieService.set( 'GDCAuthSST', 'Hello World' );
+            //this.cookieService.set( 'GDCAuthTT', 'Hello World' );
+            return resp;
+        }, err => {
+            console.log("===> Error");
+            console.log(err);
+        });
+        return ret;
+
     }
 
     logout() {

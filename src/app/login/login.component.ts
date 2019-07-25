@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import sdk from '@gooddata/gooddata-js';
 
 import { AlertService, AuthenticationService } from '@app/_services';
 
@@ -27,8 +28,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            username: [''],
+            password: ['']
         });
 
         // get return url from route parameters or default to '/'
@@ -47,11 +48,42 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
+        // this.authenticationService.login('hang.ngo@gooddata.com', 'changeit')
+        //     .pipe(first())
+        //     .subscribe(
+        //Hang
+
+        sdk.user
+           .login('hang.ngo@gooddata.com', 'changeit').then(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                //     var projectId = 'dzz5d0npfglwepv16k8lyr6631dmkepc';
+                //     return sdk.user.getAccountInfo().then(accountInfo => {
+                //         const userId = accountInfo.profileUri.split("/").reverse()[0];
+                //     const isProjectAssigned = sdk.project.getProjects(userId).then(projects => {
+                //         // find project
+                //         const isProjectAssigned = projects.some(project => {
+                //             return project.links.metadata.split("/").reverse()[0] === projectId;
+                //         });
+                //     if (!isProjectAssigned) {
+                //         return sdk.xhr
+                //             .post("/api/assign-project", {
+                //                 data: {
+                //                     user: '/gdc/account/profile/65b12d07ca493f60ceb1b57c1d6eebb5',
+                //                 },
+                //             })
+                //             .then(() => {
+                //                     isProjectAssigned: true
+                               
+                //             });
+                //     }
+                //     return Promise.resolve();
+                // });
+            // })
+            // .catch(error => {
+                
+            // });
+                    console.log("==> Navigate to home");
+                    this.router.navigateByUrl('/home');
                 },
                 error => {
                     this.alertService.error(error);

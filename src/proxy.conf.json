@@ -1,0 +1,15 @@
+{
+    "/gdc": {
+        "target": "https://staging3.intgdc.com",
+       
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "cookieDomainRewrite": "localhost",
+        "secure": false,
+        
+        "headers": {
+            "host": "staging3.intgdc.com",
+            "origin": null
+        }
+    }
+}
