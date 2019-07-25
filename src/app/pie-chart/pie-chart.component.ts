@@ -6,8 +6,6 @@ import * as invariant from 'invariant';
 
 import { Component, Input, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core';
 import { PieChart, Chart } from '@gooddata/react-components';
-import { environment } from '../../environments/environment';
-import { template } from '@angular/core/src/render3';
 
 
 interface PieChartBucketProps {
@@ -22,7 +20,7 @@ interface PieChartProps {
 
 @Component({
   selector: 'app-pie-chart',
-  template: '<span>Test</span><span [id]="rootDomID"></span>'
+  template: '<div class="myContainer" style="height:300px" [id]="rootDomID"></div>',
 })
 
 export class PieChartComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
