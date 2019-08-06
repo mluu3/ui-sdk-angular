@@ -18,6 +18,12 @@ import { RegisterComponent } from './register';
 import { KpiComponent } from './kpi/kpi.component';
 import { PivotTableComponent } from './pivot-table/pivot-table.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';;
+import { ColumnChartComponent } from './column-chart/column-chart.component';;
+import { VisualizationAreaChartComponent } from './visualization-area-chart/visualization-area-chart.component'
+;
+import { VisualizationAreaChartByUriComponent } from './visualization-area-chart-by-uri/visualization-area-chart-by-uri.component'
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -34,7 +40,11 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 ,
         KpiComponent ,
         PivotTableComponent ,
-        PieChartComponent  ],
+        PieChartComponent ,
+        BarChartComponent ,
+        ColumnChartComponent,
+        VisualizationAreaChartComponent,
+        VisualizationAreaChartByUriComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

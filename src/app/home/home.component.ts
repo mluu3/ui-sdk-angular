@@ -8,6 +8,7 @@ import {Model} from '@gooddata/react-components';
 import { isSimpleMeasure } from '@gooddata/gooddata-js/lib/DataLayer/utils/AfmUtils';
 import { measure } from '@gooddata/react-components/dist/helpers/model';
 import { MEASURES } from '@gooddata/react-components/dist/constants/bucketNames';
+import * as Piechart from '../pie-chart/pie-chart.component';
 
 @Component({ 
     
@@ -17,40 +18,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
     users: User[] = [];
-    measures = [
-        {
-            measure: {
-                localIdentifier: 'franchiseFeesAdRoyaltyIdentifier',
-                definition: {
-                    measureDefinition: {
-                        item: {
-                            identifier: 'aa5JBkFDa7sJ'
-                        }
-                    }
-                },
-                format: '#,##0'
-            }
-        },
-        {
-            measure: {
-                localIdentifier: 'franchiseFeesAdRoyaltyIdentifier',
-                definition: {
-                    measureDefinition: {
-                        item: {
-                            identifier: 'aa5JBkFDa7sJ'
-                        }
-                    }
-                },
-                format: '#,##0'
-            }
-        }
-    ]
+    
     constructor(
         private authenticationService: AuthenticationService,
         private userService: UserService
     ) {
         
     }
+
+
 
     ngOnInit() {
         //this.loadAllUsers();

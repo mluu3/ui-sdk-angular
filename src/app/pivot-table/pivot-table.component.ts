@@ -5,7 +5,7 @@ import * as invariant from 'invariant';
 import { Component, Input, OnInit, OnDestroy, OnChanges, AfterViewInit } from '@angular/core';
 
 import '@gooddata/react-components/styles/css/main.css';
-import { PivotTable } from '@gooddata/react-components';
+import { PivotTable, Model } from '@gooddata/react-components';
 import {
   projectId,
   quarterDateIdentifier,
@@ -20,20 +20,8 @@ import {
 } from '../../utils/fixtures.js';
 
 
-// interface PivotTableBucketProps {
-//   measures?: any[];
-//   rows?: any[];
-//   columns?: any[];
-//   totals?: any[];
-//   filters?: any[];
-//   sortBy?: any[];
-// }
-interface PivotTableProps {
-  projectId: string;
-  pageSize?: number;
-  //config?: PivotTableConfigPros;
-  groupRows?: boolean;
-  exportTitle?: string;
+interface PivotTableBucketProps {
+  projectId:any;
   measures?: any[];
   rows?: any[];
   columns?: any[];
@@ -41,26 +29,44 @@ interface PivotTableProps {
   filters?: any[];
   sortBy?: any[];
 }
+interface PivotTableProps {
+  projectId: any;  
+  pageSize:number;
+  config: (any),
+  groupRows:boolean,
+  exportTitle:string
+}
 
 @Component({
   selector: 'app-pivot-table',
-  template: '<span [id]="rootDomID"></span>'
+  template: '<div class="pivot-table" style="height:500px" [id]="rootDomID"></div>'
   // templateUrl: './pivot-table.component.html',
   // styleUrls: ['./pivot-table.component.css']
 })
 export class PivotTableComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit  {
+  @Input() projectId: any;
+  @Input() pageSize: number;
+  @Input() groupRows: boolean;
+  @Input() exportTitle: string;
+  @Input() totals: any[];
+  @Input() filters: any[];
+  @Input() config: any;
+  @Input() sortBy: any[];
 
-  @Input() measures?: any[];
-  @Input() projectId: string;
-  @Input() rows?: any[];
-  @Input() columns?: any[];
-  @Input() pageSize?: number;
-  @Input() groupRows?: boolean;
-  @Input() exportTitle?: string;
-  @Input() totals?: any[];
-  @Input() filters?: any[];
-  @Input() sortBy?: any[];
- // @Input() config?: (any);
+ xMeasures=[
+    Model.measure(franchiseFeesIdentifier).format("#,##0"),
+    Model.measure(franchiseFeesAdRoyaltyIdentifier).format("#,##0"),
+    Model.measure(franchiseFeesInitialFranchiseFeeIdentifier).format("#,##0"),
+    Model.measure(franchiseFeesIdentifierOngoingRoyalty).format("#,##0"),
+ ]
+ xRows=[
+  Model.attribute(locationStateDisplayFormIdentifier),
+  Model.attribute(locationNameDisplayFormIdentifier),
+  Model.attribute(menuCategoryAttributeDFIdentifier).localIdentifier("menu"),
+]
+xColums=[Model.attribute(quarterDateIdentifier), Model.attribute(monthDateIdentifier)]
+
+//xSortBy = [Model.attributeSortItem("menu", "asc")]
 
   public rootDomID: string;
 
@@ -69,52 +75,20 @@ export class PivotTableComponent implements OnInit, OnDestroy, OnChanges, AfterV
     invariant(node, `Node '${this.rootDomID} not found!`);
     return node;
   }
-
-  // protected getBuckets(): PivotTableProps {
-  //   const {
-  //     measures,
-  //     rows,
-  //     columns,
-  //     totals,
-  //     filters,
-  //     sortBy
-  //   } = this;
-  //   return {
-  //     measures,
-  //     rows,
-  //     columns,
-  //     totals,
-  //     filters,
-  //     sortBy
-  //   };
-  // }
-
-  protected getProps(): PivotTableProps {
-    const {
-      projectId,
-      pageSize,
-     // config,
-      groupRows,
-      exportTitle,
-      measures,
-      rows,
-      columns,
-      totals,
-      filters,
-      sortBy
-    } = this;
+  
+  protected getProps(): PivotTableProps | PivotTableBucketProps {
     return {
-      projectId,
-      pageSize,
-     // config,
-      groupRows,
-      exportTitle,
-      measures,
-      rows,
-      columns,
-      totals,
-      filters,
-      sortBy
+      projectId: projectId,     
+      measures:this.xMeasures,
+      rows:this.xRows,
+      columns:this.xColums,
+      totals:this.totals,
+      filters:this.filters,
+      sortBy:this.sortBy,
+      pageSize:this.pageSize,
+      groupRows:this.groupRows,
+      exportTitle:this.exportTitle,
+      config:this.config
     };
   }
 

@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         //Hang
 
         sdk.user
-           .login('hang.ngo@gooddata.com', 'changeit').then(
+           .login('tu.bui@gooddata.com', 'changeit').then(
                 data => {
                 //     var projectId = 'dzz5d0npfglwepv16k8lyr6631dmkepc';
                 //     return sdk.user.getAccountInfo().then(accountInfo => {

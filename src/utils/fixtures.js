@@ -1,34 +1,35 @@
 // (C) 2007-2019 GoodData Corporation
 
-// const demoProject = {
-//     "https://secure.gooddata.com": "k26dtejorcqlqf11crn6imbeevp2q4kg",
-//     "https://staging3.intgdc.com": "ht3owbpk6h0yfjtkcsgva3osu3z7paol",
-//     "https://staging2.intgdc.com": "exveshu0intwbr4nk6ao8ft6vesjiqus",
-//     "https://staging.intgdc.com": "xskxypodp5s4p2t6x99b2szivf8qi3st",
-//     "https://developer.na.gooddata.com": "xms7ga4tf3g3nzucd8380o2bev8oeknp",
-// };
+const demoProject = {
+    "https://secure.gooddata.com": "k26dtejorcqlqf11crn6imbeevp2q4kg",
+    "https://staging3.intgdc.com": "ht3owbpk6h0yfjtkcsgva3osu3z7paol",
+    "https://staging2.intgdc.com": "exveshu0intwbr4nk6ao8ft6vesjiqus",
+    "https://staging.intgdc.com": "xskxypodp5s4p2t6x99b2szivf8qi3st",
+    "https://developer.na.gooddata.com": "xms7ga4tf3g3nzucd8380o2bev8oeknp",
+};
 
-// const backendUrl = BACKEND_URL; // eslint-disable-line no-undef
-// const demoProjectId = demoProject[backendUrl];
-// if (!demoProjectId) {
-//     console.error(`[fixtures.js] ProjectId for backend "${backendUrl}" is not in `, demoProject); // eslint-disable-line no-console
-// }
+const backendUrl = "https://staging3.intgdc.com"; // eslint-disable-line no-undef
+const demoProjectId = demoProject[backendUrl];
+if (!demoProjectId) {
+    console.error(`[fixtures.js] ProjectId for backend "${backendUrl}" is not in `, demoProject); // eslint-disable-line no-console
+}
 
-// console.log("The /gdc proxy is connected to: ", backendUrl, " with projectId: ", demoProjectId); // eslint-disable-line no-console
+console.log("The /gdc proxy is connected to: ", backendUrl, " with projectId: ", demoProjectId); // eslint-disable-line no-console
 
 // your projectId would be probably static (you may ignore the code above)
 
-// export const backendUrlForInfo = backendUrl;
- export const projectId = 'ht3owbpk6h0yfjtkcsgva3osu3z7paol';
-
+export const backendUrlForInfo = backendUrl;
+ //export const projectId = 'ht3owbpk6h0yfjtkcsgva3osu3z7paol';
+export const projectId=demoProjectId;
+ 
 export const averageCheckSizeByServer = "afewRzGAersh";
 export const averageDailyTotalSales = "aagJGHg1bxap";
 export const barVisualizationIdentifier = "aaKaMZUJeyGo";
 export const barVisualizationUri = `/gdc/md/${projectId}/obj/9285`;
-export const lineVisualizationIdentifier = "aaAaDFt4c1yC";
-export const lineVisualizationUri = `/gdc/md/${projectId}/obj/9276`;
-export const areaVisualizationIdentifier = "acCaGDIrc1iU";
-export const areaVisualizationUri = `/gdc/md/${projectId}/obj/9278`;
+export const lineVisualizationIdentifier = "aabwukUifTTA";
+export const lineVisualizationUri = `/gdc/md/${projectId}/obj/9155`;
+export const areaVisualizationIdentifier = "aabFLlHkaoLN";
+export const areaVisualizationUri = `/gdc/md/${projectId}/obj/9112`;
 export const headlineVisualizationIdentifier = "aaiaOcMqbyMj";
 export const headlineVisualizationUri = `/gdc/md/${projectId}/obj/9279`;
 export const scatterVisualizationIdentifier = "ab4aHg6lej5e";
@@ -79,3 +80,4 @@ export const tableVisualizationUri = `/gdc/md/${projectId}/obj/8702`;
 export const totalSalesIdentifier = "aa7ulGyKhIE5";
 export const numberOfRestaurantsIdentifier = "aawAq8YqhM3o";
 export const averageRestaurantDailyCostsIdentifier = "aaQJzQzoeKwZ";
+

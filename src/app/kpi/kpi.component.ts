@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 
 interface KpiProps {
   measure: string;
-  projectId: string;
+  projectId: any;
   format?: string;
   filters?: any[];
   onLoadingChanged?: (any);
@@ -23,7 +23,7 @@ interface KpiProps {
 })
 
 export class KpiComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-  @Input() measure: string;
+  @Input() measure: any;
   @Input() projectId: string;
   @Input() filters: any[];
   @Input() format: string;
