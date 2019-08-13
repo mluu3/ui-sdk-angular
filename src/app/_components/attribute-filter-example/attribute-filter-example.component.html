@@ -1,0 +1,22 @@
+<div className="s-attribute-filter">
+  <AttributeFilter
+      identifier={locationResortIdentifier}
+      projectId={projectId}
+      fullscreenOnMobile={false}
+      onApply={this.onApply}
+  />
+  <div style:{{ height: 300 }} className="s-line-chart">
+      {error ? (
+          <ErrorComponent message={error} />
+      ) : (
+          <LineChart
+              projectId={projectId}
+              measures={[totalSales]}
+              trendBy={locationResort}
+              filters={filters}
+              onLoadingChanged={this.onLoadingChanged}
+              onError={this.onError}
+          />
+      )}
+  </div>
+</div>

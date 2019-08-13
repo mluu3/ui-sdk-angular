@@ -8,7 +8,7 @@ import {Model} from '@gooddata/react-components';
 import { isSimpleMeasure } from '@gooddata/gooddata-js/lib/DataLayer/utils/AfmUtils';
 import { measure } from '@gooddata/react-components/dist/helpers/model';
 import { MEASURES } from '@gooddata/react-components/dist/constants/bucketNames';
-import * as Piechart from '../pie-chart/pie-chart.component';
+import * as Piechart from '../_components/pie-chart/pie-chart.component';
 
 @Component({ 
     

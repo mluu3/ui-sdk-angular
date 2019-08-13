@@ -25,7 +25,7 @@ export class AuthenticationService {
     login(username: string, password: string) : Observable<any>{
         var body = {
             "postUserLogin":{
-                "login":"hang.ngo@gooddata.com",
+                "login":"tu.bui@gooddata.com",
                 "password":"changeit",
                 "remember":1,
                 "verify_level":0
