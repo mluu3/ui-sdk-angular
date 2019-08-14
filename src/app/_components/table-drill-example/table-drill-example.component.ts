@@ -25,6 +25,7 @@ interface TableDrillExampleBucketProps{
   measures?: any[];
   attributes?: any[];  
   drillableItems?:any[];
+  onFiredDrillEvent?:any;
   totals?: any[];
   filters?: any[];
   sortBy?: any[];
@@ -39,13 +40,7 @@ interface TableDrillExampleProps {
   // templateUrl: './table-drill-example.component.html',
   // styleUrls: ['./table-drill-example.component.css']
 })
-export class TableDrillExampleComponent extends React.Component<{}, {drillEvent} > implements OnInit, OnDestroy, OnChanges, AfterViewInit  {
-  constructor(props) {
-    super(props);
-    this.state = {
-        drillEvent: null,
-    };
-}
+export class TableDrillExampleComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit  {  
   @Input() projectId: any;
   @Input() filters: any[];
   @Input() sortBy: any[];
@@ -74,57 +69,58 @@ export class TableDrillExampleComponent extends React.Component<{}, {drillEvent}
     {
         measureIdentifier: "franchiseFeesIdentifier",
         type: "avg",
-        attributeIdentifier: "month",
+        attributeIdentifier: "state",
     },
     {
         measureIdentifier: "franchiseFeesAdRoyaltyIdentifier",
         type: "avg",
-        attributeIdentifier: "month",
+        attributeIdentifier: "mostatenth",
     },
     {
         measureIdentifier: "franchiseFeesInitialFranchiseFeeIdentifier",
         type: "avg",
-        attributeIdentifier: "month",
+        attributeIdentifier: "state",
     },
     {
         measureIdentifier: "franchiseFeesIdentifierOngoingRoyalty",
         type: "avg",
-        attributeIdentifier: "month",
+        attributeIdentifier: "state",
     },
   ];
 
 
-  //xSortBy = [Model.attributeSortItem("menu", "asc")]
+  xSortBy = [Model.attributeSortItem("menu", "asc")]
   xDrillableItems = [
     HeaderPredicateFactory.identifierMatch(menuCategoryAttributeDFIdentifier),
     HeaderPredicateFactory.identifierMatch(franchiseFeesIdentifier),
   ];
-  
-  onDrill = drillEvent => {
-    // eslint-disable-next-line no-console
-    console.log(
-        "onFiredDrillEvent",
-        drillEvent,
-        JSON.stringify(drillEvent.drillContext.intersection, null, 2),
-    );
-    this.setState({
-        drillEvent,
-    });
-    return true;
-};
+  onFiredDrillEvent=(data) => { console.log(data.executionContext); console.log(data.drillContext); }
 
-  renderDrillValue() {
-     const {drillEvent}  = this.state;
+  // onDrill = drillEvent => {
+  //   // eslint-disable-next-line no-console
+  //   console.log(
+  //       "onFiredDrillEvent",
+  //       drillEvent,
+  //       JSON.stringify(drillEvent.drillContext.intersection, null, 2),
+  //   );
+  //   this.setState({
+  //       drillEvent,
+  //   });
+  //   return true;
+  // };
 
-    if (!drillEvent) {
-        return null;
-    }
+  // renderDrillValue() {
+  //    const {drillEvent}  = this.state;
 
-    const drillColumn = drillEvent.drillContext.row[drillEvent.drillContext.columnIndex];
-    const drillValue = typeof drillColumn === "object" ? drillColumn.name : drillColumn;
+  //   if (!drillEvent) {
+  //       return null;
+  //   }
 
-    return ({drillValue});
-  }
+  //   const drillColumn = drillEvent.drillContext.row[drillEvent.drillContext.columnIndex];
+  //   const drillValue = typeof drillColumn === "object" ? drillColumn.name : drillColumn;
+
+  //   return ({drillValue});
+  // }
   public rootDomID: string;
 
   protected getRootDomNode() {
@@ -139,20 +135,32 @@ export class TableDrillExampleComponent extends React.Component<{}, {drillEvent}
       measures:this.xMeasures,
       attributes:this.xAttributes,
       totals:this.xTotals,
+      // drillableItems:this.xDrillableItems,
+      // onFiredDrillEvent:this.onDrill,
       filters:this.filters,
-      sortBy:this.sortBy,
+      sortBy:this.xSortBy,
+      drillableItems:this.xDrillableItems,
+      onFiredDrillEvent:this.onFiredDrillEvent,
     };
   }
 
-  private _isMounted(): boolean {
+  private isMounted(): boolean {
     return !!this.rootDomID;
   }
 
-  render() {
-    if (this._isMounted()) 
-    return(
-      ReactDOM.render(React.createElement(Table, this.getProps()), this.getRootDomNode())
-    )
+  // render() {
+  //   //{this.renderDrillValue()}
+  //   if (this._isMounted()) {
+  //   return(
+  //     ReactDOM.render(React.createElement(Table, this.getProps()), this.getRootDomNode())
+  //   )
+  //   }
+  // }
+  protected render() {
+    if (this.isMounted()) {
+      ReactDOM.render(React.createElement(Table, this.getProps()), this.getRootDomNode());
+    }
+    
   }
 
   ngOnInit() {
@@ -169,7 +177,8 @@ export class TableDrillExampleComponent extends React.Component<{}, {drillEvent}
 
   ngOnDestroy() {
     // Uncomment if Angular 4 issue that ngOnDestroy is called AFTER DOM node removal is resolved
-    // ReactDOM.unmountComponentAtNode(this.getRootDomNode())
+     //ReactDOM.unmountComponentAtNode(this.getRootDomNode())
   }
 
 }
+

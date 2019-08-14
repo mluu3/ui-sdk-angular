@@ -20,7 +20,7 @@ import {
 } from '../../../utils/fixtures.js';
 
 
-interface FilterTableBucketProps {
+interface AtributeFilterExample2BucketProps {
   projectId:any;
   measures?: any[];
   attributes?: any[];  
@@ -28,15 +28,15 @@ interface FilterTableBucketProps {
   filters?: any[];
   sortBy?: any[];
 }
-interface FilterTableProps {
+interface AtributeFilterExample2Props {
   projectId: any;  
 }
 
 @Component({
-  selector: 'app-filter-table',
-  template: '<div class="filter-Table" style="height:500px" [id]="rootDomID"></div>'
-  // templateUrl: './filter-table.component.html',
-  // styleUrls: ['./filter-table.component.css']
+  selector: 'app-_attribute-filter-table',
+  template: '<div class="attribute-filter-Table" style="height:500px" [id]="rootDomID"></div>'
+  // templateUrl: './attribute-filter-Table.component.html',
+  // styleUrls: ['./attribute-filter-Table.component.css']
 })
 
 
@@ -44,7 +44,7 @@ export class AttributeFilterExample2Component implements OnInit, OnDestroy, OnCh
   @Input() projectId: any;
   //@Input() totals: any[];
   @Input() filters: any[];
-  @Input() sortBy: any[];
+  //@Input() sortBy: any[];
 
   
   xMeasures=[
@@ -89,7 +89,7 @@ export class AttributeFilterExample2Component implements OnInit, OnDestroy, OnCh
   ];
 
 
-//xSortBy = [Model.attributeSortItem("menu", "asc")]
+ xSortBy = [Model.attributeSortItem("month", "asc")]
 
   public rootDomID: string;
 
@@ -99,14 +99,14 @@ export class AttributeFilterExample2Component implements OnInit, OnDestroy, OnCh
     return node;
   }
   
-  protected getProps(): FilterTableProps | FilterTableBucketProps {
+  protected getProps(): AtributeFilterExample2Props | AtributeFilterExample2BucketProps {
     return {
       projectId: projectId,     
       measures:this.xMeasures,
       attributes:this.xAttributes,
       totals:this.xTotals,
       filters:this.filters,
-      sortBy:this.sortBy,
+      sortBy:this.xSortBy,
     };
   }
 
