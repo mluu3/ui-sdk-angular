@@ -22,9 +22,8 @@ interface AttributeFilterProps {
   selector: 'app-attribute-filter',
   template: '<div class="attribute-filter" style="height:200px" [id]="rootDomID"></div>',
 })
-export class AttributeFilterComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class AttributeFilterComponent  implements OnInit, OnDestroy, OnChanges, AfterViewInit {
   @Input() projectId:any;
-  @Input() fullscreenOnMobile:boolean;
  
   onApply(...params) {
     // eslint-disable-next-line no-console
@@ -51,7 +50,7 @@ export class AttributeFilterComponent implements OnInit, OnDestroy, OnChanges, A
     return !!this.rootDomID;
   }
   protected render() {
-    if (this.isMounted()) {
+    if (this.isMounted()) {      
       ReactDOM.render(React.createElement(AttributeFilter, this.getProps()), this.getRootDomNode());
     }
     
