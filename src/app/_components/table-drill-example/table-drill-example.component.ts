@@ -39,7 +39,7 @@ interface TableDrillExampleProps {
   // templateUrl: './table-drill-example.component.html',
   // styleUrls: ['./table-drill-example.component.css']
 })
-export class TableDrillExampleComponent extends React.Component implements OnInit, OnDestroy, OnChanges, AfterViewInit  {
+export class TableDrillExampleComponent extends React.Component<{}, {drillEvent} > implements OnInit, OnDestroy, OnChanges, AfterViewInit  {
   constructor(props) {
     super(props);
     this.state = {
@@ -113,18 +113,18 @@ export class TableDrillExampleComponent extends React.Component implements OnIni
     return true;
 };
 
-//   renderDrillValue() {
-//      const drillEvent  = this.state;
+  renderDrillValue() {
+     const {drillEvent}  = this.state;
 
-//     if (!drillEvent) {
-//         return null;
-//     }
+    if (!drillEvent) {
+        return null;
+    }
 
-//     const drillColumn = drillEvent.drillContext.row[drillEvent.drillContext.columnIndex];
-//     const drillValue = typeof drillColumn === "object" ? drillColumn.name : drillColumn;
+    const drillColumn = drillEvent.drillContext.row[drillEvent.drillContext.columnIndex];
+    const drillValue = typeof drillColumn === "object" ? drillColumn.name : drillColumn;
 
-//     return ({drillValue}   );
-// }
+    return ({drillValue});
+  }
   public rootDomID: string;
 
   protected getRootDomNode() {
