@@ -24,7 +24,8 @@ interface AttributeFilterProps {
 })
 export class AttributeFilterComponent  implements OnInit, OnDestroy, OnChanges, AfterViewInit {
   @Input() projectId:any;
- 
+  
+  
   onApply(...params) {
     // eslint-disable-next-line no-console
     console.log("AttributeFilterComponentExample onApply", ...params);

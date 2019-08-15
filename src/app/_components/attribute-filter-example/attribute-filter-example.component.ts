@@ -39,19 +39,27 @@ interface AttributeFilterExampleProps {
 
 @Component({
   selector: 'app-attribute-filter-example',
-  template: '<div class="app-attribute-filter-example" style="height:200px" [id]="rootDomID"></div>',
+  template: '<div class="app-attribute-filter-example" style="height:500px" [id]="rootDomID"></div>',
 })
 
 
-export class AttributeFilterExampleComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class AttributeFilterExampleComponent  implements OnInit, OnDestroy, OnChanges, AfterViewInit {
   @Input() projectId:any;
-  @Input() fullscreenOnMobile:boolean;
   @Input() filters:any[];
+//   constructor(props) {
+//     super(props);
 
+//     this.onApply = this.onApply.bind(this);
+//     this.state = {
+//         filters: [],
+//         error: null,
+//     };
+// }
 
   totalSales =[Model.measure(totalSalesIdentifier).format("#,##0").alias("$ Total Sales")]
   locationResort = Model.attribute(locationResortIdentifier)  
   setState: any;
+  
    
   
   onLoadingChanged(...params) {
@@ -71,7 +79,7 @@ export class AttributeFilterExampleComponent implements OnInit, OnDestroy, OnCha
   
   onError(...params) {
     // eslint-disable-next-line no-console
-    console.info("AttributeFilterExample onLoadingChanged", ...params);
+    console.info("AttributeFilterExampleComponent onLoadingChanged", ...params);
   }
  filterPositiveAttribute(filter) {
   let filters;
@@ -86,7 +94,11 @@ export class AttributeFilterExampleComponent implements OnInit, OnDestroy, OnCha
               },
           },
       ];
-  } 
+  } else {
+    this.setState({
+        error: "The filter must have at least one item selected",
+    });
+}
   this.setState(filters);
 }
 
@@ -118,7 +130,7 @@ filterNegativeAttribute(filter) {
     
     return {
       projectId:projectId,
-      identifier:this.locationResort,      
+      identifier:locationResortIdentifier,      
       onApply:this.onApply,
       fullscreenOnMobile:false,
     };
@@ -138,33 +150,36 @@ filterNegativeAttribute(filter) {
     return !!this.rootDomID;
   }
   protected render() {
+    //return()=>{[
     if (this.isMounted()) {      
-      ReactDOM.render(React.createElement(AttributeFilter, this.getPropsFilter()),this.getRootDomNode())      
+      ReactDOM.render(React.createElement(AttributeFilter, this.getPropsFilter()),this.getRootDomNode())
+      , ReactDOM.render(React.createElement(LineChart, this.getPropsLineChart()),this.getRootDomNode())       
+    //}
     }
     
   }
-  protected renderLineChart() {
-    if (this.isMounted()) {      
-      ReactDOM.render(React.createElement(LineChart, this.getPropsLineChart()),this.getRootDomNode())      
-    }
+  // protected renderLineChart() {
+  //   //if (this.isMounted()) {      
+  //     ReactDOM.render(React.createElement(LineChart, this.getPropsLineChart()),this.getRootDomNode())      
+  //   //}
     
-  }
+  // }
   ngOnInit() {
     this.rootDomID = uuid.v1();
   }
 
   ngOnChanges() {
     this.render();
-    this.renderLineChart();
+    //this.renderLineChart();
   }
 
   ngAfterViewInit() {
     this.render();
-    this.renderLineChart();
+    //this.renderLineChart();
   }
   ngOnDestroy() {
     // Uncomment if Angular 4 issue that ngOnDestroy is called AFTER DOM node removal is resolved
-    // ReactDOM.unmountComponentAtNode(this.getRootDomNode())
+     ReactDOM.unmountComponentAtNode(this.getRootDomNode())
   }
 
 }
