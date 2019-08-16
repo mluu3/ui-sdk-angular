@@ -11,8 +11,9 @@ import { MEASURES } from '@gooddata/react-components/dist/constants/bucketNames'
 import * as Piechart from '../_components/pie-chart/pie-chart.component';
 
 @Component({ 
-    
-    templateUrl: 'home.component.html' 
+    selector: 'app-home',
+    templateUrl: 'home.component.html' ,
+    // styleUrls: ['./home.compoenet.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
     currentUser: User;

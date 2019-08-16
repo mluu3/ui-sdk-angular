@@ -36,6 +36,8 @@ import { PivotTableComponentsComponent } from './_routes/pivot-table-components/
 import { SortingComponentsComponent } from './_routes/sorting-components/sorting-components.component';
 import { TimeOverTimeComparisonComponent } from './_routes/time-over-time-comparison/time-over-time-comparison.component';
 import { AttributeFilterComponentsComponent } from './_routes/attribute-filter-components/attribute-filter-components.component';
+import { VisualizationComponentsComponent } from './_routes/visualization-components/visualization-components.component';
+
 
 
 const appRoutes: Routes = [
@@ -76,7 +78,8 @@ const appRoutes: Routes = [
     { path: 'sorting-components', component: SortingComponentsComponent},
     { path: 'time-over-time-comparison', component: TimeOverTimeComparisonComponent},
     { path: 'attribute-filter-components', component: AttributeFilterComponentsComponent},
-
+    { path: 'visualization-components', component: VisualizationComponentsComponent},
+    
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

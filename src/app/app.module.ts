@@ -9,6 +9,7 @@ import { fakeBackendProvider } from './_helpers';
 
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -59,14 +60,28 @@ import { SortingComponentsComponent } from './_routes/sorting-components/sorting
 import { TimeOverTimeComparisonComponent } from './_routes/time-over-time-comparison/time-over-time-comparison.component';
 import { AttributeFilterComponentsComponent } from './_routes/attribute-filter-components/attribute-filter-components.component';
 import { TableDrillExampleComponent } from './_components/table-drill-example/table-drill-example.component'
-
+import { MyNavComponent } from './my-nav/my-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing,
+        routing
     ],
     declarations: [
         AppComponent,
@@ -117,7 +132,9 @@ import { TableDrillExampleComponent } from './_components/table-drill-example/ta
         SortingComponentsComponent,
         AttributeFilterComponentsComponent,
         TimeOverTimeComparisonComponent,
-        TableDrillExampleComponent,],
+        TableDrillExampleComponent,
+        MyNavComponent
+    ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

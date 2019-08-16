@@ -1,4 +1,4 @@
-﻿
+﻿<!-- 
 <h3>Basic Components</h3>
 <p>The following components accept measures and attributes, perform the execution, and render data as a chart, table or KPI.</p>
 <app-basic-components></app-basic-components> 
@@ -16,4 +16,49 @@
 <app-time-over-time-comparison></app-time-over-time-comparison> 
 
 <h3>You are on attrbute filter page!</h3>
-<app-attribute-filter-components></app-attribute-filter-components> 
+<app-attribute-filter-components></app-attribute-filter-components>  -->
+<!-- <app-my-nav></app-my-nav> -->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <img src="https://secure.gooddata.com/images/logo-new.png" alt="GoodData.UI Examples" class="jsx-4159900335 gd-header-logo-img" style="height: 30px">
+      <h1>GoodData.UI</h1>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/pie-chart'"> Docs </a>
+        <a mat-button [routerLink]="'/bar-chart'"> Support </a>
+        <a mat-button [routerLink]="'/basic-components'"> Live Examples </a>
+      </div>
+    </mat-toolbar-row>
+    
+    <mat-toolbar-row>
+        <span style="font-size: 16px;">Connected to: https://staging3.intgdc.com</span>
+        <span style="font-size: 16px; padding-left: 50px;">Project ID: ht3owbpk6h0yfjtkcsgva3osu3z7paol</span>
+      </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+        <mat-sidenav #sidenav>
+          <mat-nav-list>
+      
+            <a mat-list-item [routerLink]="'/basic-components'"> Basic Components </a>
+            <a mat-list-item [routerLink]="'/attribute-filter-components'"> Attribute Filter Components </a>
+            <a mat-list-item [routerLink]="'/pivot-table-components'"> Pivot Tables </a>
+            <a mat-list-item [routerLink]="'/sorting-components'"> Sorting Components </a>
+            <a mat-list-item [routerLink]="'/time-over-time-comparison'"> Time Over Time Comparision </a>
+            <a mat-list-item [routerLink]="'/visualization-components'"> Visualization Components </a>
+            <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+          </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div >
+      
+            <router-outlet></router-outlet>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+      
+  
+  
